@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ManagedLibrary\ManagedLibrary.csproj" />
+    <ProjectReference Include="..\..\src\NativeLibrary\NativeLibrary.vcxproj" />
   </ItemGroup>
 
 </Project>
