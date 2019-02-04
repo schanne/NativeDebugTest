@@ -1,12 +1,12 @@
 ﻿using ManagedLibrary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace NativeDebugTests
 {
-    [TestClass]
+    [TestFixture]
     public class TestFoo
     {
-        [TestMethod]
+        [Test]
         public void TestBar()
         {
             var foo = new Foo();
@@ -14,7 +14,7 @@ namespace NativeDebugTests
             Assert.AreEqual(42, foo.Bar());
         }
 
-        [TestMethod]
+        [Test]
         public void TestPass()
         {
             var foo = new Foo();
@@ -22,7 +22,7 @@ namespace NativeDebugTests
             Assert.AreEqual(0, 0);
         }
 
-        [TestMethod]
+        [Test]
         public void TestFail()
         {
             var foo = new Foo();

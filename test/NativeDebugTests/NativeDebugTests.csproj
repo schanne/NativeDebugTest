@@ -5,14 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.9.0" />
+    <PackageReference Include="NUnit.Extension.NUnitProjectLoader" Version="3.6.0" />
+    <PackageReference Include="NUnit.Extension.VSProjectLoader" Version="3.8.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
+    <PackageReference Include="OpenCover" Version="4.6.519" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ManagedLibrary\ManagedLibrary.csproj" />
     <ProjectReference Include="..\..\src\NativeLibrary\NativeLibrary.vcxproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y $(SolutionDir)\x64\$(ConfigurationName)\NativeLibrary.* $(TargetDir)&#xD;&#xA;copy /Y $(SolutionDir)\src\ManagedLibrary\bin\$(ConfigurationName)\net461\ManagedLibrary.* $(TargetDir)&#xD;&#xA;copy /Y $(SolutionDir)\runtests.bat $(TargetDir)&#xD;&#xA;cd $(TargetDir)&#xD;&#xA;$(SolutionDir)\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:runtests.bat -register:user -filter:+[*]*&#xD;&#xA;$(SolutionDir)\lib\ReportGenerator.4.0.9\tools\net47\ReportGenerator.exe -reports:results.xml -targetdir:coverage&#xD;&#xA;" />
+  </Target>
 
 </Project>
